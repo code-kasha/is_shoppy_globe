@@ -2,65 +2,21 @@ import "./Navbar.css"
 
 import { Link } from "react-router"
 
+import Cart from "../assets/cart.svg?react"
+import Logo from "../assets/logo.svg?react"
+
 export default function Navbar() {
 	return (
 		<>
-			<nav className="bg-neutral-primary">
-				<div className="flex flex-wrap justify-between items-center mx-auto max-w-7xl p-4">
-					<Link
-						href="/cart"
-						className="flex items-center space-x-3 rtl:space-x-reverse"
-					>
-						<svg
-							width="40px"
-							height="40px"
-							viewBox="0 0 24 24"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z"
-								stroke="#1C274C"
-								strokeWidth="1.5"
-							/>
-							<path
-								d="M16.5 18.0001C17.3284 18.0001 18 18.6716 18 19.5001C18 20.3285 17.3284 21.0001 16.5 21.0001C15.6716 21.0001 15 20.3285 15 19.5001C15 18.6716 15.6716 18.0001 16.5 18.0001Z"
-								stroke="#1C274C"
-								strokeWidth="1.5"
-							/>
-							<path
-								d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7"
-								stroke="#1C274C"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-							/>
-						</svg>
-
-						<span className="self-center text-xl text-heading font-semibold whitespace-nowrap">
-							Shoppy Globe
-						</span>
+			<nav className="navbar-main">
+				<Link href="/" className="navbar-link">
+					<Logo />
+					<span className="navbar-title">Shoppy Globe</span>
+				</Link>
+				<div className="navbar-actions">
+					<Link className="cart-btn" to="/cart">
+						<Cart />
 					</Link>
-					<div className="flex items-center space-x-6 rtl:space-x-reverse">
-						<Link
-							className="text-sm font-medium text-fg-brand hover:underline"
-							to="/cart"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="size-6"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-								/>
-							</svg>
-						</Link>
-					</div>
 				</div>
 			</nav>
 		</>

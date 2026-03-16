@@ -1,49 +1,53 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { useSelector } from "react-redux"
 
-export default function useCartProducts(page = 1, limit = 10) {
-	const searchTerm = useSelector((state) => state.search.term)
+const BASE_URL = "https://dummyjson.com/products"
+const DEBOUNCE_MS = 500
+
+export default function useCartProducts(page, limit, term) {
 	const [products, setProducts] = useState([])
 	const [total, setTotal] = useState(0)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
-		let isMounted = true
-		const fetchProducts = async () => {
+		let cancelled = false
+
+		async function fetchProducts() {
 			setLoading(true)
+			setError(null)
+
 			try {
-				const url = searchTerm
-					? `https://dummyjson.com/products/search?q=${encodeURIComponent(
-							searchTerm,
-						)}&limit=${limit}&skip=${(page - 1) * limit}`
-					: `https://dummyjson.com/products?limit=${limit}&skip=${
-							(page - 1) * limit
-						}`
+				const url = term
+					? `${BASE_URL}/search?q=${encodeURIComponent(term)}&limit=${limit}&skip=${(page - 1) * limit}`
+					: `${BASE_URL}?limit=${limit}&skip=${(page - 1) * limit}`
 
 				const res = await axios.get(url)
-				if (!isMounted) return
 
-				setProducts(res.data.products)
-				setTotal(res.data.total)
-			} catch (err) {
-				if (!isMounted) return
-				setError(err.message || "Failed to fetch products")
+				if (!cancelled) {
+					setProducts(res.data.products)
+					setTotal(res.data.total)
+				}
+			} catch {
+				if (!cancelled) {
+					setError("Failed to load products")
+				}
 			} finally {
-				if (isMounted) setLoading(false)
+				if (!cancelled) {
+					setLoading(false)
+				}
 			}
 		}
 
-		const timer = setTimeout(() => {
-			fetchProducts()
-		}, 300)
+		const timer = term
+			? setTimeout(fetchProducts, DEBOUNCE_MS)
+			: fetchProducts()
 
 		return () => {
+			cancelled = true
 			clearTimeout(timer)
-			isMounted = false
 		}
-	}, [page, limit, searchTerm])
+	}, [page, limit, term])
 
 	return { products, total, loading, error }
 }

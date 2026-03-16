@@ -1,45 +1,43 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { useSelector } from "react-redux"
 
 export default function useCartProduct(id) {
-	const cartItems = useSelector((state) => state.cart.items)
-
 	const [product, setProduct] = useState(null)
-	const [selectedImage, setSelectedImage] = useState("")
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		if (!id) return
 
-		let isMounted = true
+		let cancelled = false
 
-		const fetchProduct = async () => {
+		setProduct(null)
+		setLoading(true)
+		setError(null)
+
+		async function fetchProduct() {
 			try {
-				const res = await axios.get(`https://dummyjson.com/products/${id}`)
-				if (!isMounted) return
+				const { data } = await axios.get(`https://dummyjson.com/products/${id}`)
 
-				const data = res.data
-				setProduct({
-					...data,
-					isInCart: cartItems.some((item) => item.id === data.id),
-				})
-				setSelectedImage(data.thumbnail || data.images?.[0] || "")
+				if (!cancelled) {
+					setProduct(data)
+				}
 			} catch (err) {
-				if (!isMounted) return
-				setError(err.message || "Failed to fetch product")
+				if (!cancelled) {
+					setError(err.message || "Failed to fetch product")
+				}
 			} finally {
-				if (isMounted) setLoading(false)
+				if (!cancelled) {
+					setLoading(false)
+				}
 			}
 		}
 
-		setTimeout(fetchProduct, 0)
-
+		fetchProduct()
 		return () => {
-			isMounted = false
+			cancelled = true
 		}
-	}, [id, cartItems])
+	}, [id])
 
-	return { product, selectedImage, setSelectedImage, loading, error }
+	return { product, loading, error }
 }

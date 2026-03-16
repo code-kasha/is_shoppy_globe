@@ -1,13 +1,9 @@
 @reference "./index.css";
 
-@layer base {
-	main {
-		@apply grow;
-	}
+main {
+	@apply grow;
 }
 
-@layer components {
-	.main-container {
-		@apply flex flex-col h-screen;
-	}
+.main-container {
+	@apply flex flex-col h-screen;
 }

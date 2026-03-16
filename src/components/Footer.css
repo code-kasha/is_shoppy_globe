@@ -1,29 +1,25 @@
 @reference "../index.css";
 
-@layer base {
-	footer {
-		@apply shadow-xs py-3;
-	}
+footer {
+	@apply shadow-xs py-3;
 }
 
-@layer components {
-	.footer-container {
-		@apply w-full mx-auto max-w-7xl p-4 flex flex-col md:flex-row md:items-center justify-center space-y-2 xs:space-y-0;
-	}
+.footer-container {
+	@apply w-full mx-auto max-w-7xl p-4 flex flex-col md:flex-row md:items-center justify-center space-y-2 xs:space-y-0;
+}
 
-	.footer-content {
-		@apply text-sm sm:text-center mx-auto;
-	}
+.footer-content {
+	@apply text-sm text-center mx-auto;
+}
 
-	.footer-links {
-		@apply flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0 mx-auto;
-	}
+.footer-links {
+	@apply hidden mb:flex flex-wrap items-center mt-3 text-sm font-medium mx-auto;
+}
 
-	.footer-link {
-		@apply hover:underline me-4 md:me-6 mx-auto;
-	}
+.footer-link {
+	@apply hover:underline me-4 md:me-6 mx-auto;
+}
 
-	.footer-underline {
-		@apply hover:underline;
-	}
+.footer-underline {
+	@apply hover:underline;
 }

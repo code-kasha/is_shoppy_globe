@@ -1,5 +1,6 @@
 import { Toaster } from "react-hot-toast"
 import { Outlet } from "react-router"
+import PageTransition from "./components/PageTransition"
 
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -11,7 +12,9 @@ function App() {
 		<div className="main-container">
 			<Header />
 			<main>
-				<Outlet />
+				<PageTransition>
+					<Outlet />
+				</PageTransition>
 				<Toaster position="top-right" />
 			</main>
 			<Footer />

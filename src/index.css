@@ -9,8 +9,6 @@
 	--breakpoint-xl: 1280px;
 }
 
-@layer components {
-	.tab-heading {
-		@apply text-2xl text-center p-3;
-	}
+.tab-heading {
+	@apply text-2xl text-center p-3;
 }

@@ -1,1 +1,21 @@
 @reference "../index.css";
+
+.navbar-main {
+	@apply flex flex-wrap justify-between items-center mx-auto max-w-7xl p-4;
+}
+
+.navbar-link {
+	@apply flex items-center space-x-3 rtl:space-x-reverse;
+}
+
+.navbar-title {
+	@apply self-center text-xl font-semibold whitespace-nowrap;
+}
+
+.navbar-actions {
+	@apply flex items-center space-x-6 rtl:space-x-reverse;
+}
+
+.cart-btn {
+	@apply text-sm font-medium hover:underline rounded-xl hover:bg-slate-300 hover:border-gray-200 hover:border-2 p-1;
+}

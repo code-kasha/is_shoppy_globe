@@ -1,1 +1,13 @@
 @reference "../index.css";
+
+.search-container {
+	@apply max-w-4xl mx-auto my-4;
+}
+
+.search-input {
+	@apply w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300;
+}
+
+.clear-btn {
+	@apply mt-2 text-sm text-red-500 hover:underline;
+}
