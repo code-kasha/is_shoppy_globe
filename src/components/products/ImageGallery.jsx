@@ -6,12 +6,18 @@ export default function ImageGallery({
 }) {
 	return (
 		<div className="image-gallery">
-			<img src={selectedImage} alt={title} className="image-gallery-main" />
+			<img
+				src={selectedImage}
+				alt={title}
+				loading="lazy"
+				className="image-gallery-main"
+			/>
 			<div className="image-gallery-thumbs">
 				{images?.map((img, i) => (
 					<img
 						key={i}
 						src={img}
+						loading="lazy"
 						alt={`${title} view ${i + 1}`}
 						onClick={() => onSelect(img)}
 						className={`image-gallery-thumb ${selectedImage === img ? "active" : ""}`}

@@ -24,7 +24,17 @@ export default function useCartProduct(id) {
 				}
 			} catch (err) {
 				if (!cancelled) {
-					setError(err.message || "Failed to fetch product")
+					if (axios.isAxiosError(err)) {
+						if (err.response?.status === 404) {
+							setError("Product not found")
+						} else if (err.response) {
+							setError("Something went wrong, please try again")
+						} else {
+							setError("Network error, check your connection")
+						}
+					} else {
+						setError("An unexpected error occurred")
+					}
 				}
 			} finally {
 				if (!cancelled) {

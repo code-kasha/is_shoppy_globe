@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../store/cartSlice"
 import toast from "react-hot-toast"
 
+import { formatDate } from "../utils/formatDate"
+
 import { selectCartItemIds } from "../store/selectors"
 import useCartProduct from "../hooks/useCartProduct"
 
@@ -86,17 +88,16 @@ export default function ProductDetails() {
 			</ProductSection>
 
 			<ProductSection title="Metadata">
-				<InfoRow
-					label="Created"
-					value={new Date(product.meta?.createdAt).toLocaleString()}
-				/>
-				<InfoRow
-					label="Updated"
-					value={new Date(product.meta?.updatedAt).toLocaleString()}
-				/>
+				<InfoRow label="Created" value={formatDate(product.meta?.createdAt)} />
+				<InfoRow label="Updated" value={formatDate(product.meta?.updatedAt)} />
 				<InfoRow label="Barcode" value={product.meta?.barcode} />
 				{product.meta?.qrCode && (
-					<img src={product.meta.qrCode} alt="QR Code" className="qr-code" />
+					<img
+						src={product.meta.qrCode}
+						alt="QR Code"
+						className="qr-code"
+						loading="lazy"
+					/>
 				)}
 			</ProductSection>
 

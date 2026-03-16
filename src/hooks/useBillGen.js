@@ -9,19 +9,22 @@ export default function useBillGen() {
 	const generateBill = () => {
 		if (!cartItems.length) return { items: [], total: 0 }
 
-		const totalAmount = cartItems.reduce(
-			(acc, item) =>
-				acc + (Number(item.price) || 0) * (Number(item.quantity) || 1),
-			0,
-		)
-
-		return {
-			items: cartItems.map((item) => ({
+		try {
+			const items = cartItems.map((item) => ({
 				...item,
 				price: Number(item.price) || 0,
 				quantity: Number(item.quantity) || 1,
-			})),
-			total: totalAmount,
+			}))
+
+			const total = items.reduce(
+				(acc, item) => acc + item.price * item.quantity,
+				0,
+			)
+
+			return { items, total }
+		} catch {
+			toast.error("Failed to generate bill")
+			return { items: [], total: 0 }
 		}
 	}
 
@@ -31,10 +34,15 @@ export default function useBillGen() {
 			return null
 		}
 
-		const billData = generateBill()
-		toast.success("Purchase successful!")
-		dispatch(clearCart())
-		return billData
+		try {
+			const billData = generateBill()
+			toast.success("Purchase successful!")
+			dispatch(clearCart())
+			return billData
+		} catch {
+			toast.error("Checkout failed, please try again")
+			return null
+		}
 	}
 
 	return { bill: generateBill(), checkout }

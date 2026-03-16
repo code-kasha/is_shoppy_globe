@@ -1,12 +1,10 @@
 import { createBrowserRouter } from "react-router"
 
 import App from "./App"
-
-import Cart from "./routes/Cart"
-import Checkout from "./routes/Checkout"
-import ProductList from "./routes/ProductList"
-import ProductDetails from "./routes/ProductDetails"
 import NotFound from "./routes/NotFound"
+import LazyRoute from "./LazyRoute"
+
+import { ProductList, ProductDetails, Cart, Checkout } from "./lazyRoutes"
 
 export const router = createBrowserRouter([
 	{
@@ -16,19 +14,19 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <ProductList />,
+				element: <LazyRoute component={ProductList} />,
 			},
 			{
 				path: "product/:id",
-				element: <ProductDetails />,
+				element: <LazyRoute component={ProductDetails} />,
 			},
 			{
 				path: "cart",
-				element: <Cart />,
+				element: <LazyRoute component={Cart} />,
 			},
 			{
 				path: "checkout",
-				element: <Checkout />,
+				element: <LazyRoute component={Checkout} />,
 			},
 		],
 	},

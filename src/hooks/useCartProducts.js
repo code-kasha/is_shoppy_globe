@@ -28,9 +28,19 @@ export default function useCartProducts(page, limit, term) {
 					setProducts(res.data.products)
 					setTotal(res.data.total)
 				}
-			} catch {
+			} catch (err) {
 				if (!cancelled) {
-					setError("Failed to load products")
+					if (axios.isAxiosError(err)) {
+						if (err.response?.status === 404) {
+							setError("No products found")
+						} else if (err.response) {
+							setError("Something went wrong, please try again")
+						} else {
+							setError("Network error, check your connection")
+						}
+					} else {
+						setError("An unexpected error occurred")
+					}
 				}
 			} finally {
 				if (!cancelled) {
