@@ -1,0 +1,17 @@
+@reference "../index.css";
+
+.pagination-container {
+	@apply flex justify-center gap-4 mt-10 items-center;
+}
+
+.prev-btn {
+	@apply px-4 py-1 border rounded disabled:opacity-40;
+}
+
+.target {
+	@apply text-sm font-medium;
+}
+
+.next-btn {
+	@apply px-4 py-1 border rounded disabled:opacity-40;
+}

@@ -1,0 +1,29 @@
+@reference "../../index.css";
+
+.product-card {
+	@apply flex flex-col border rounded-lg p-3 space-y-2 shadow-sm hover:shadow-md transition w-4/5 mx-auto xs:w-full max-w-[220px] xs:max-w-[200px];
+}
+
+.product-image {
+	@apply h-40 object-cover rounded w-full;
+}
+
+.product-title {
+	@apply text-sm font-medium line-clamp-1 hover:line-clamp-none;
+}
+
+.product-details {
+	@apply flex justify-between text-sm text-gray-600;
+}
+
+.add-to-cart {
+	@apply w-full py-1 rounded-md text-sm font-semibold transition;
+}
+
+.inactive {
+	@apply bg-gray-300 cursor-not-allowed;
+}
+
+.active {
+	@apply bg-amber-400 hover:bg-amber-500 text-black;
+}
