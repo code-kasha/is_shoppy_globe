@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { clearCart } from "../redux/cartSlice"
+import { clearCart } from "../store/cartSlice"
 import toast from "react-hot-toast"
 
 export default function useBillGen() {
