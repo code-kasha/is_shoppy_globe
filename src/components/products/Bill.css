@@ -1,0 +1,29 @@
+@reference "../../index.css";
+
+.bill-container {
+	@apply max-w-3xl mx-auto mt-8 p-4 space-y-6 text-center;
+}
+
+.bill-head-text {
+	@apply text-2xl font-bold;
+}
+
+.bill-main {
+	@apply bg-gray-50 p-4 rounded-lg shadow-sm text-left space-y-2;
+}
+
+.bill-text {
+	@apply text-xl font-semibold mb-2;
+}
+
+.bill-items {
+	@apply flex justify-between py-1 text-sm border-b last:border-0;
+}
+
+.total-container {
+	@apply flex justify-between font-bold text-base pt-2;
+}
+
+.back-btn {
+	@apply inline-block bg-amber-400 hover:bg-amber-500 text-black font-semibold px-6 py-2 rounded-md transition;
+}
