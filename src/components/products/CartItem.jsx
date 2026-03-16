@@ -2,38 +2,29 @@ import "./CartItem.css"
 
 export default function CartItem({ item, onIncrease, onDecrease, onRemove }) {
 	return (
-		<div className="flex justify-between items-center border rounded-lg p-3 gap-4">
-			<div className="flex items-center gap-3">
+		<div className="cart-item-container">
+			<div className="cart-item">
 				<img
 					src={item.thumbnail}
 					alt={item.title}
 					loading="lazy"
-					className="w-16 h-16 object-cover rounded"
+					className="cart-item-img"
 				/>
 				<div>
-					<p className="font-semibold">{item.title}</p>
-					<p className="text-sm text-gray-600">💲{item.price}</p>
+					<p className="cart-item-title">{item.title}</p>
+					<p className="cart-item-price">💲{item.price}</p>
 				</div>
 			</div>
 
-			<div className="flex items-center gap-2">
-				<button
-					onClick={onDecrease}
-					className="w-8 h-8 border rounded hover:bg-gray-100 transition font-medium"
-				>
+			<div className="cart-item-quantity-container">
+				<button onClick={onDecrease} className="decrease-quantity-btn">
 					-
 				</button>
-				<span className="w-6 text-center">{item.quantity}</span>
-				<button
-					onClick={onIncrease}
-					className="w-8 h-8 border rounded hover:bg-gray-100 transition font-medium"
-				>
+				<span className="quantity">{item.quantity}</span>
+				<button onClick={onIncrease} className="increase-quantity-btn">
 					+
 				</button>
-				<button
-					onClick={onRemove}
-					className="ml-2 text-red-500 hover:text-red-700 font-semibold transition"
-				>
+				<button onClick={onRemove} className="remove-btn">
 					Remove
 				</button>
 			</div>

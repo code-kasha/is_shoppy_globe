@@ -8,6 +8,8 @@ import { Link, useNavigate } from "react-router"
 import CartItem from "../components/products/CartItem"
 import toast from "react-hot-toast"
 
+import "./Cart.css"
+
 export default function Cart() {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -16,12 +18,11 @@ export default function Cart() {
 		(acc, item) => acc + item.price * item.quantity,
 		0,
 	)
-
 	if (!cartItems.length) {
 		return (
-			<div className="flex flex-col items-center justify-center mt-16 gap-4">
-				<p className="text-lg font-semibold">Your cart is empty</p>
-				<Link to="/" className="text-amber-500 hover:underline">
+			<div className="cart-container-empty">
+				<p className="cart-empty">Your cart is empty</p>
+				<Link to="/" className="shop-btn">
 					Continue Shopping
 				</Link>
 			</div>
@@ -29,10 +30,10 @@ export default function Cart() {
 	}
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
-			<h1 className="text-2xl font-bold text-center">Your Cart</h1>
+		<div className="cart-container">
+			<h1 className="cart-title">Your Cart</h1>
 
-			<div className="space-y-4">
+			<div className="cart-items">
 				{cartItems.map((item) => (
 					<CartItem
 						key={item.id}
@@ -47,12 +48,9 @@ export default function Cart() {
 				))}
 			</div>
 
-			<div className="flex justify-between items-center border-t pt-4">
-				<p className="text-xl font-semibold">Total: 💲{total.toFixed(2)}</p>
-				<button
-					onClick={() => navigate("/checkout")}
-					className="bg-amber-400 hover:bg-amber-500 text-black font-semibold px-4 py-2 rounded-md transition"
-				>
+			<div className="total-container">
+				<p className="total-text">Total: 💲{total.toFixed(2)}</p>
+				<button onClick={() => navigate("/checkout")} className="checkout-btn">
 					Checkout
 				</button>
 			</div>
