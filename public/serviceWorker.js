@@ -2,7 +2,7 @@
 // Service Worker — Vite React Ecommerce App
 // Strategy:
 //   • Static/local assets  → Cache First
-//   • Navigation requests  → Network First, fallback offline.html
+//   • Navigation requests  → Network First
 //   • API / dynamic data   → Network Only (no caching)
 // ============================================================
 
@@ -11,7 +11,8 @@ const STATIC_CACHE = `static-${CACHE_VERSION}`
 const PAGES_CACHE = `pages-${CACHE_VERSION}`
 
 const STATIC_ASSETS = [
-	"/offline.html",
+	"/", // ← add this
+	"/index.html", // ← and this
 	"/manifest.json",
 	"/favicon.ico",
 	"/favicon-16x16.png",
@@ -20,7 +21,6 @@ const STATIC_ASSETS = [
 	"/icons/android-chrome-512x512.png",
 	"/icons/apple-touch-icon.png",
 ]
-
 // ─── Install ────────────────────────────────────────────────
 self.addEventListener("install", (event) => {
 	event.waitUntil(
@@ -143,22 +143,16 @@ async function networkFirstWithOfflineFallback(request) {
 
 		return networkResponse
 	} catch {
-		// Network failed — try the cached copy of this specific URL.
 		const cached = await cache.match(request)
 		if (cached) return cached
 
-		// For SPAs, try the root index as it handles all routes.
-		const indexPage = await cache.match("/")
-		if (indexPage) return indexPage
+		// Try root — covers all SPA routes
+		const indexPage =
+			(await cache.match("/")) ||
+			(await cache.match("/index.html")) ||
+			(await caches.match("/")) ||
+			(await caches.match("/index.html")) // ← search all caches
 
-		// Last resort: dedicated offline page.
-		const offlinePage = await caches.match("/offline.html")
-		return (
-			offlinePage ||
-			new Response("<h1>You are offline</h1>", {
-				status: 503,
-				headers: { "Content-Type": "text/html" },
-			})
-		)
+		if (indexPage) return indexPage
 	}
 }

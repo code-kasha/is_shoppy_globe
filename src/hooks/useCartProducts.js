@@ -35,6 +35,8 @@ export default function useCartProducts(page, limit, term) {
 							setError("No products found")
 						} else if (err.response) {
 							setError("Something went wrong, please try again")
+						} else if (!navigator.onLine) {
+							setError("You are offline. Please check your connection.")
 						} else {
 							setError("Network error, check your connection")
 						}

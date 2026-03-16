@@ -3,9 +3,9 @@
 ## 🔧 Project Setup
 
 - [✅] Project created using **Vite**
-- [] Runs without errors
-- [] No console errors
-- [] node_modules removed before submission
+- [✅] Runs without errors
+- [✅] No console errors
+- [✅] node_modules removed before submission
 
 ## 🧩 Component Structure (20 Marks)
 
