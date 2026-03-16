@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
 	--breakpoint-mb: 320px;
 	--breakpoint-xs: 480px;
 	--breakpoint-sm: 640px;
@@ -9,17 +9,7 @@
 	--breakpoint-xl: 1280px;
 }
 
-@layer base {
-	main {
-		@apply grow;
-	}
-}
-
 @layer components {
-	.main-container {
-		@apply flex flex-col h-screen;
-	}
-
 	.tab-heading {
 		@apply text-2xl text-center p-3;
 	}

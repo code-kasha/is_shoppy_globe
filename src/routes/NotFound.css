@@ -1,4 +1,4 @@
-@reference "tailwindcss";
+@reference "../index.css";
 
 .nf-main-container {
 	@apply min-h-screen bg-white flex flex-col items-center justify-center text-center px-4;
