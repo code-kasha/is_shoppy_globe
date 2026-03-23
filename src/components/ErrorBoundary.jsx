@@ -38,9 +38,9 @@ export default class ErrorBoundary extends Component {
 	}
 
 	render() {
+		// Render custom fallback if provided, otherwise use the default UI
 		if (this.state.hasError) {
 			return (
-				// Render custom fallback if provided, otherwise use the default UI
 				this.props.fallback ?? (
 					<div className="error-boundary">
 						<p className="error-boundary-title">Something went wrong</p>

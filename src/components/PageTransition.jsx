@@ -1,7 +1,7 @@
 import "./PageTransition.css"
 
 import { useLocation } from "react-router"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 /**
  * PageTransition component — wraps page content and triggers a fade+slide-up
@@ -11,18 +11,18 @@ import { useState } from "react"
 export default function PageTransition({ children }) {
 	const location = useLocation()
 	const [visible, setVisible] = useState(true)
-	const [prevKey, setPrevKey] = useState(location.key)
 
-	/* When the route changes, hide the content briefly to re-trigger the transition */
-	if (location.key !== prevKey) {
-		setPrevKey(location.key)
-		setVisible(false)
-	}
+	useEffect(() => {
+		// Defer both state updates to avoid synchronous setState inside effect
+		const hideTimer = setTimeout(() => setVisible(false), 0)
+		const showTimer = setTimeout(() => setVisible(true), 50)
 
-	/* After a short delay, make the content visible again to play the animation */
-	if (!visible) {
-		setTimeout(() => setVisible(true), 50)
-	}
+		// Cleanup both timers if component unmounts or route changes again
+		return () => {
+			clearTimeout(hideTimer)
+			clearTimeout(showTimer)
+		}
+	}, [location.key])
 
 	return (
 		<div className={`page-transition ${visible ? "visible" : ""}`}>

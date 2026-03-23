@@ -1,32 +1,24 @@
-import "./PageTransition.css"
-
-import { useLocation } from "react-router"
-import { useState } from "react"
+import "./OfflinePage.css"
 
 /**
- * PageTransition component — wraps page content and triggers a fade+slide-up
- * animation on every route change.
- * @param {React.ReactNode} children - The page content to animate.
+ * OfflinePage component — full screen fallback shown when the user loses network connectivity.
  */
-export default function PageTransition({ children }) {
-	const location = useLocation()
-	const [visible, setVisible] = useState(true)
-	const [prevKey, setPrevKey] = useState(location.key)
-
-	/* When the route changes, hide the content briefly to re-trigger the transition */
-	if (location.key !== prevKey) {
-		setPrevKey(location.key)
-		setVisible(false)
-	}
-
-	/* After a short delay, make the content visible again to play the animation */
-	if (!visible) {
-		setTimeout(() => setVisible(true), 50)
-	}
-
+export default function OfflinePage() {
 	return (
-		<div className={`page-transition ${visible ? "visible" : ""}`}>
-			{children}
+		<div className="offline-container">
+			{/* Satellite icon */}
+			<p className="offline-icon">📡</p>
+
+			{/* Heading */}
+			<h1 className="offline-title">You're offline</h1>
+
+			{/* Subtext */}
+			<p className="offline-message">Check your connection and try again.</p>
+
+			{/* Reload the page on click */}
+			<button onClick={() => window.location.reload()} className="offline-btn">
+				Retry
+			</button>
 		</div>
 	)
 }
