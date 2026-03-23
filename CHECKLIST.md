@@ -94,8 +94,8 @@
 
 ## 📝 Code Quality (20 Marks)
 
-- [] Proper indentation
-- [] Meaningful variable names
+- [✅] Proper indentation
+- [✅] Meaningful variable names
 - [] Comments added
 - [] Clean folder structure
 
