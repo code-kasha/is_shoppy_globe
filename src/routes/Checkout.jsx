@@ -19,7 +19,7 @@ export default function Checkout() {
 	}
 
 	if (!completedBill && !cartItems.length)
-		return <p className="text-center mt-10 text-lg">Your cart is empty.</p>
+		return <p className="text-center mt-20 text-lg">Your cart is empty.</p>
 
 	if (!completedBill) {
 		return (

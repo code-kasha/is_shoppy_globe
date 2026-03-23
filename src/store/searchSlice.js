@@ -8,9 +8,16 @@ const searchSlice = createSlice({
 	name: "search",
 	initialState,
 	reducers: {
+		/**
+		 * Set the active search term.
+		 */
 		setSearchTerm: (state, action) => {
 			state.term = action.payload
 		},
+
+		/**
+		 * Clear the active search term.
+		 */
 		clearSearchTerm: (state) => {
 			state.term = ""
 		},

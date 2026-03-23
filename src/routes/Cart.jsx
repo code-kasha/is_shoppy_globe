@@ -19,7 +19,7 @@ export default function Cart() {
 	if (!cartItems.length) {
 		return (
 			<div className="fixed inset-0 flex flex-col items-center justify-center gap-4">
-				<p className="text-lg font-semibold">Your cart is empty</p>
+				<p className="text-lg font-semibold mt-50">Your cart is empty</p>
 				<Link to="/" className="text-amber-500 hover:underline">
 					Continue Shopping
 				</Link>
