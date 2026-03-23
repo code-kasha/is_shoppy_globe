@@ -1,17 +1,21 @@
+/* Import base Tailwind styles */
 @reference "../index.css";
 
+/* Ring spin — clockwise */
 @keyframes spin {
 	to {
 		transform: rotate(360deg);
 	}
 }
 
+/* Ring spin — counter-clockwise */
 @keyframes spin-reverse {
 	to {
 		transform: rotate(-360deg);
 	}
 }
 
+/* Entrance animation — fades in and scales up */
 @keyframes fade-in {
 	from {
 		opacity: 0;
@@ -23,6 +27,7 @@
 	}
 }
 
+/* Gentle vertical float for the ring group */
 @keyframes float {
 	0%,
 	100% {
@@ -33,6 +38,7 @@
 	}
 }
 
+/* Loading dots — alternating opacity pulse */
 @keyframes dot-pulse {
 	from {
 		opacity: 0.3;
@@ -42,50 +48,40 @@
 	}
 }
 
-/* backdrop — unchanged */
+/* Full screen blurred backdrop */
 .spinner-container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 50;
+	@apply fixed inset-0 w-screen h-screen flex items-center justify-center z-50;
 	background: rgba(0, 0, 0, 0.35);
 	backdrop-filter: blur(6px);
 }
 
+/* Inner column — fades in on mount */
 .spinner-wrap {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 16px;
+	@apply flex flex-col items-center gap-4;
 	animation: fade-in 0.3s ease both;
 }
 
-/* three counter-rotating rings */
+/* Ring group — floats up and down continuously */
 .spinner-rings {
-	position: relative;
-	width: 64px;
-	height: 64px;
+	@apply relative w-16 h-16;
 	animation: float 2.4s ease-in-out infinite;
 }
 
+/* Base ring — transparent border, specific sides colored per ring */
 .ring {
-	position: absolute;
-	border-radius: 50%;
+	@apply absolute rounded-full;
 	border: 2.5px solid transparent;
 }
 
+/* Outer ring — spins clockwise */
 .ring-outer {
-	inset: 0;
+	@apply inset-0;
 	border-top-color: #fbbf24;
 	border-right-color: #fbbf2466;
 	animation: spin 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Middle ring — spins counter-clockwise */
 .ring-mid {
 	inset: 10px;
 	border-bottom-color: #f59e0b;
@@ -93,6 +89,7 @@
 	animation: spin-reverse 0.9s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Inner ring — spins clockwise, fastest */
 .ring-inner {
 	inset: 20px;
 	border-top-color: #d97706;
@@ -100,33 +97,25 @@
 	animation: spin 0.65s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Center dot — solid amber core */
 .ring-center {
-	position: absolute;
+	@apply absolute rounded-full bg-amber-400 opacity-90;
 	inset: 28px;
-	border-radius: 50%;
-	background: #fbbf24;
-	opacity: 0.9;
 }
 
-/* text + dots */
+/* Loading message — uppercase, spaced, white */
 .spinner-text {
-	color: rgba(255, 255, 255, 0.9);
-	font-size: 13px;
-	font-weight: 500;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
+	@apply text-xs font-medium tracking-widest uppercase text-white/90;
 }
 
+/* Dot row beneath the message */
 .spinner-dots {
-	display: flex;
-	gap: 5px;
+	@apply flex gap-1.5;
 }
 
+/* Individual dot — pulses in sequence via staggered animation-delay */
 .spinner-dots span {
-	width: 3px;
-	height: 3px;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.5);
+	@apply w-1 h-1 rounded-full bg-white/50;
 	animation: dot-pulse 0.6s ease-in-out infinite alternate;
 }
 

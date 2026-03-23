@@ -1,25 +1,32 @@
+/* Import base Tailwind styles */
 @reference "../index.css";
 
+/* Footer wrapper — subtle top shadow and compact vertical padding */
 footer {
 	@apply shadow-xs py-3;
 }
 
+/* Inner layout — stacks vertically on mobile, row on md+ */
 .footer-container {
 	@apply w-full mx-auto max-w-7xl p-4 flex flex-col md:flex-row md:items-center justify-center space-y-2 xs:space-y-0;
 }
 
+/* Copyright text — centered */
 .footer-content {
 	@apply text-sm text-center mx-auto;
 }
 
+/* Nav links — hidden on small screens, visible on mb+ */
 .footer-links {
 	@apply hidden mb:flex flex-wrap items-center mt-3 text-sm font-medium mx-auto;
 }
 
+/* Individual nav link with right margin spacing */
 .footer-link {
 	@apply hover:underline me-4 md:me-6 mx-auto;
 }
 
+/* Underline-only link — used for Contact */
 .footer-underline {
 	@apply hover:underline;
 }
