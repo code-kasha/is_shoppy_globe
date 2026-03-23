@@ -7,11 +7,19 @@ import toast from "react-hot-toast"
 import { addToCart } from "../../store/cartSlice"
 import { selectCartItemIds } from "../../store/selectors"
 
+/**
+ * ProductCard component — displays a product thumbnail, title, price, rating,
+ * and an "Add to Cart" button that disables once the item is in the cart.
+ * @param {object} product - The product to display.
+ */
 export default function ProductCard({ product }) {
 	const dispatch = useDispatch()
 	const cartItemIds = useSelector(selectCartItemIds)
+
+	/* Check if this product is already in the cart */
 	const isInCart = cartItemIds.has(product.id)
 
+	/* Memoized handler — only recreated if dispatch or product changes */
 	const handleAddToCart = useCallback(() => {
 		dispatch(addToCart(product))
 		toast.success(`${product.title} added to cart`)
@@ -19,6 +27,7 @@ export default function ProductCard({ product }) {
 
 	return (
 		<div className="product-card">
+			{/* Product thumbnail */}
 			<img
 				src={product.thumbnail}
 				alt={product.title}
@@ -26,15 +35,18 @@ export default function ProductCard({ product }) {
 				loading="lazy"
 			/>
 
+			{/* Product name — links to the product detail page */}
 			<h3 className="product-title">
 				<Link to={`/product/${product.id}`}>{product.title}</Link>
 			</h3>
 
+			{/* Price and rating */}
 			<div className="product-details">
 				<p title={"Price"}>💲{product.price}</p>
 				<p title={"Rating"}>⭐ {product.rating}</p>
 			</div>
 
+			{/* Add to cart — disabled and relabeled once item is in cart */}
 			<button
 				onClick={handleAddToCart}
 				disabled={isInCart}
