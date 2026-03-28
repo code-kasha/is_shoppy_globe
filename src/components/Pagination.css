@@ -3,7 +3,7 @@
 
 /* Centered row — scales with gap on smaller screens */
 .pagination-container {
-	@apply flex justify-center items-center gap-2 sm:gap-4 mt-10 flex-wrap;
+	@apply flex justify-center items-center gap-2 sm:gap-4 mt-10 flex-wrap mb-10;
 }
 
 /* Shared base for both buttons */
